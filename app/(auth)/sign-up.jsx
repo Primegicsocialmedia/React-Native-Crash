@@ -5,7 +5,7 @@ import { images } from "../../constants";
 import FormField from "../components/FormField";
 import CustomButton from "../components/CustomButton";
 import { Link, router } from "expo-router";
-import { createUser } from "../../lib/appwrite";
+import { createUser, getCurrentUser, signIn } from "../../lib/appwrite";
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,7 +23,11 @@ const SignUp = () => {
     setIsSubmitting(true)
 
     try {
-     const result = await createUser(form.email, form.password, form.username)
+     await signIn(form.email,form.password)
+     const result = await getCurrentUser()
+     setUser(result)
+     setIsLogged(true)
+     Alert.alert('Success', 'User signed in succesfully')
 
      //set to global state...
 
