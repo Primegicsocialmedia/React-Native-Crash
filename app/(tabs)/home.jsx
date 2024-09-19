@@ -33,13 +33,16 @@ const Home = () => {
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <VideoCard
-            video={item}
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
           />
-          
         )}
         ListHeaderComponent={() => (
-          <View className="my-6 px-4 space-y-6">
-            <View className="justify-between items-start flex-row mb-6">
+          <View className=" flex my-6 px-4 space-y-6">
+            <View className=" flex justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
                   Welcome Back
@@ -61,7 +64,7 @@ const Home = () => {
               <Text className='text-gray-100 text-lg font-pregular mb-3'>
                 Latest Videos
               </Text>
-              <Trending posts={latestPosts}/>
+              <Trending posts={latestPosts ?? []}/>
             </View>
           </View>
         )}
